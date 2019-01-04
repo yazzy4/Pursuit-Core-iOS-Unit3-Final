@@ -10,10 +10,10 @@ import Foundation
 
 struct Element: Codable {
     let name: String
-    let atomic_mass: Int
-    let boil: Int
-    let discovered_by: String
-    let melt: Int
-    let spectral_img: URL
+    let atomic_mass: Double
+    let boil: Double?
+    let discovered_by: String?
+    let melt: Double?
+    let spectral_img: URL?
     let number: Int
 }

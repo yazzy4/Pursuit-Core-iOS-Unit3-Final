@@ -14,6 +14,8 @@ class ElementDetailViewController: UIViewController {
     
     @IBOutlet weak var elementTableView: UITableView!
     
+    public var elements: Element!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
