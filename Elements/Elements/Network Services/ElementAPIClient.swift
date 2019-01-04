@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class ElementAPIClient {
     static func getElements(completionHandler: @escaping (AppError?, [Element]?) -> Void) {
@@ -25,6 +26,8 @@ final class ElementAPIClient {
             }
         }
     }
+    
+    
     
     static func postFavorite(data: Data, completionHandler: @escaping (AppError?, Bool) -> Void) {
         let publishFavorite = "https://5c1d79abbc26950013fbcaa9.mockapi.io/api/v1/favorites"

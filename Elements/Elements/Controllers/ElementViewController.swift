@@ -13,6 +13,7 @@ class ElementViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var refreshControl: UIRefreshControl!
+    
 
     private var elements = [Element]() {
         didSet {
@@ -27,7 +28,9 @@ class ElementViewController: UIViewController {
     super.viewDidLoad()
     tableView.dataSource = self
     fetchElements()
+    
   }
+    
     
     private func refreshElements() {
         refreshControl = UIRefreshControl()
@@ -62,6 +65,8 @@ class ElementViewController: UIViewController {
         let element = elements[indexPath.row]
         detailViewController.elements = element
     }
+    
+    
 
 
 }
@@ -74,22 +79,27 @@ extension ElementViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "elementCell", for: indexPath)
         let element = elements[indexPath.row]
         cell.textLabel?.text = element.name
-        cell.detailTextLabel?.text = String("Symbol: \(element.number) , Atomic Mass: \(element.atomic_mass)")
-        return cell
+        cell.detailTextLabel?.text = String("Na(\(element.number)) , Atomic Mass: \(element.atomic_mass)")
+        
+       let thumbNailImage = "http://www.theodoregray.com/periodictable/Tiles/018/s7.JPG"
+        ImageHelper.shared.fetchImage(urlString: thumbNailImage) { (error, image) in
+            if let error = error {
+                print(error.errorMessage())
+                
+            } else if let image = image {
+                cell.imageView?.image = image
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
+            }
+            
+        }
+       return cell
     }
+        
 }
-    
-//    DispatchQueue.global().async {
-//    do{
-//    let imageData = try Data(contentsOf: movie.artworkUrl100)
-//    DispatchQueue.main.async {
-//    cell.imageView?.image = UIImage(data: imageData)
-//    }
-//
-//    } catch {
-//    print("contents of url error \(error)")
-//    }
-//    }
-//    return cell
-//}
-//}
+
+
+
+
